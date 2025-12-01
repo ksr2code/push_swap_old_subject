@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atvii <atvii@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ksmailov <ksmailov@student.42heilbronn.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 14:34:21 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/11/13 00:34:12 by atvii            ###   ########.fr       */
+/*   Created: 2025/12/01 17:39:20 by ksmailov          #+#    #+#             */
+/*   Updated: 2025/12/01 21:10:41 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ typedef struct s_flag
 }					t_flag;
 
 //============== parse =================
-float				compute_disorder(t_stack *stack);
-void				parse_flags(char **av, t_flag *flag);
+void				init_flags(t_flag *flag);
 int					valid_input(char **av, t_flag flag);
 
 //============== utils =================
 void				exit_error(t_stack **stack_a, t_stack **stack_b);
 void				free_stack(t_stack **stack);
 int					is_sorted(t_stack *stack);
-void				print_bench(t_flag flag);
 int					is_number(char *av);
 
 //============== stack =================
@@ -64,46 +62,16 @@ int					ft_stack_size(t_stack *stack);
 void				ft_stackadd_back(t_stack **stack, t_stack *new);
 
 //============== sort ==================
-
-/**
- * @brief Bubble sort (O(n^2)).
- * @param stack_a Main stack.
- * @param stack_b Aux stack.
- * @param s_size  Stack size.
- * @param flag    Options/bench.
- */
-void				bubble_sort(t_stack **stack_a, t_stack **stack_b,
-						int s_size, t_flag *flag);
-
-/**
- * @brief Radix sort (O(n√n) or O(n log n)).
- * @param stack_a Main stack.
- * @param stack_b Aux stack.
- * @param s_size  Stack size.
- * @param flag    Options/bench.
- */
-void				radix_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
-						t_flag *flag);
-
-/**
- * @brief Chunk sort (O(n log n)).
- * @param stack_a Main stack.
- * @param stack_b Aux stack.
- * @param s_size  Stack size.
- * @param flag    Options/bench.
- */
 void				chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
 						t_flag *flag);
+void				small_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
+						t_flag *flag);
+void				tiny_sort(t_stack **stack, t_flag *flag);
 
-/**
- * @brief Low-disorder sort.
- * @param stack_a Main stack.
- * @param stack_b Aux stack.
- * @param s_size  Stack size.
- * @param flag    Options/bench.
- */
-void				low_disorder_sort(t_stack **stack_a, t_stack **stack_b,
-						int s_size, t_flag *flag);
+//============ sort utils ==============
+int					ft_sqrt(int nb);
+int					get_min_index(t_stack *stack);
+int					count_r(t_stack *stack, int s_size);
 
 //=========== operations ==============
 void				do_sa(t_stack **stack_a, t_flag *flag);

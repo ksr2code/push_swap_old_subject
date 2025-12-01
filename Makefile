@@ -15,11 +15,8 @@ SRCS = push_swap.c\
 	   op_rotate.c\
 	   op_swap.c\
 	   parse_args.c\
-	   parse_flags.c\
-	   sort_bubble.c\
-	   sort_radix.c\
-	   sort_chunk.c\
-	   sort_low_dis.c\
+	   sort.c\
+	   sort_utils.c\
 	   stack.c\
 	   stack_utils.c
 

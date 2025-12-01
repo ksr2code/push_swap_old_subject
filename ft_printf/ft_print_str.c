@@ -6,7 +6,7 @@
 /*   By: mnestere <mnestere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 20:30:45 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/11/12 17:19:44 by mnestere         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:31:46 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	ft_print_numstr(const char *str)
 
 	if (str == NULL)
 	{
-		write(2, "(null)", 6);
+		write(1, "(null)", 6);
 		return (6);
 	}
 	count = 0;
 	count = ft_strlen(str);
-	write(2, str, count);
+	write(1, str, count);
 	return (count);
 }
 
@@ -34,10 +34,10 @@ static int	ft_print_strn(const char *str, t_flags flags)
 	count = 0;
 	if (flags.precision >= 0)
 		while (str[count] && count < flags.precision)
-			write(2, &str[count++], 1);
+			write(1, &str[count++], 1);
 	else
 		while (str[count])
-			write(2, &str[count++], 1);
+			write(1, &str[count++], 1);
 	return (count);
 }
 

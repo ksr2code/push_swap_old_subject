@@ -1,45 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_chunk.c                                       :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atvii <atvii@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ksmailov <ksmailov@student.42heilbronn.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/02 13:14:07 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/11/13 00:33:03 by atvii            ###   ########.fr       */
+/*   Created: 2025/12/01 17:53:51 by ksmailov          #+#    #+#             */
+/*   Updated: 2025/12/01 21:37:54 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/**
- * @brief Computes the integer square root of a number.
- *
- * @param nb The number to compute the square root for.
- * @return   The integer part of the square root of nb.
- */
-static int	ft_sqrt(int nb)
+void	tiny_sort(t_stack **stack, t_flag *flag)
 {
-	long	i;
+	int		highest;
+	t_stack	*ptr;
 
-	i = 0;
-	if (nb < 1)
-		return (0);
-	while (i * i < (long)nb)
-		i++;
-	if (i * i == (long)nb)
-		return (i);
-	return ((int)i - 1);
+	ptr = *stack;
+	highest = ptr->index;
+	while (ptr)
+	{
+		if (ptr->index > highest)
+			highest = ptr->index;
+		ptr = ptr->next;
+	}
+	if ((*stack)->index == highest)
+		do_ra(stack, flag);
+	else if ((*stack)->next->index == highest)
+		do_rra(stack, flag);
+	if ((*stack)->index > (*stack)->next->index)
+		do_sa(stack, flag);
 }
 
-/**
- * @brief Divides the stack into chunks and pushes them to stack_b.
- *
- * @param stack_a Pointer to the main stack.
- * @param stack_b Pointer to the auxiliary stack.
- * @param s_size  Number of elements in stack_a.
- * @param flag    Pointer to the flag structure for options and benchmarking.
- */
+void	small_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
+		t_flag *flag)
+{
+	int	min_index;
+	int	r_count;
+	int	rr_count;
+
+	while (s_size > 3)
+	{
+		min_index = get_min_index(*stack_a);
+		r_count = count_r(*stack_a, min_index + 1);
+		rr_count = s_size - r_count;
+		if (r_count <= rr_count)
+			while ((*stack_a)->index != min_index)
+				do_ra(stack_a, flag);
+		else
+			while ((*stack_a)->index != min_index)
+				do_rra(stack_a, flag);
+		if (is_sorted(*stack_a) && !(*stack_b))
+			return ;
+		do_pb(stack_a, stack_b, flag);
+		s_size--;
+	}
+	tiny_sort(stack_a, flag);
+	while (*stack_b)
+		do_pa(stack_a, stack_b, flag);
+}
+
 static void	make_chunks(t_stack **stack_a, t_stack **stack_b, int s_size,
 		t_flag *flag)
 {
@@ -68,26 +89,6 @@ static void	make_chunks(t_stack **stack_a, t_stack **stack_b, int s_size,
 		else
 			do_ra(stack_a, flag);
 	}
-}
-
-/**
- * @brief Counts the number of rotations needed to bring the max index to top.
- *
- * @param stack   Pointer to the stack.
- * @param s_size  Number of elements in the stack.
- * @return        The number of rotations required.
- */
-static int	count_r(t_stack *stack, int s_size)
-{
-	int	count;
-
-	count = 0;
-	while (stack && stack->index != (s_size - 1))
-	{
-		count++;
-		stack = stack->next;
-	}
-	return (count);
 }
 
 void	chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size,

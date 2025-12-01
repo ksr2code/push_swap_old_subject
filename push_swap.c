@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnestere <mnestere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksmailov <ksmailov@student.42heilbronn.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 12:56:50 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/11/07 14:43:23 by mnestere         ###   ########.fr       */
+/*   Created: 2025/12/01 17:51:06 by ksmailov          #+#    #+#             */
+/*   Updated: 2025/12/01 21:54:25 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,14 @@
 static void	push_swap(t_stack **stack_a, t_stack **stack_b, int s_size,
 		t_flag *flag)
 {
-	flag->disorder = compute_disorder(*stack_a);
 	if (is_sorted(*stack_a))
 		return ;
-	else if (flag->type == 1)
-		bubble_sort(stack_a, stack_b, s_size, flag);
-	else if (flag->type == 2)
-		radix_sort(stack_a, stack_b, s_size, flag);
-	else if (flag->type == 3)
-		chunk_sort(stack_a, stack_b, s_size, flag);
-	else if (flag->disorder < 0.2)
-		low_disorder_sort(stack_a, stack_b, s_size, flag);
+	else if (s_size == 2)
+		do_sa(stack_a, flag);
+	else if (s_size == 3)
+		tiny_sort(stack_a, flag);
+	else if (s_size <= 7)
+		small_sort(stack_a, stack_b, s_size, flag);
 	else
 		chunk_sort(stack_a, stack_b, s_size, flag);
 }
@@ -39,7 +36,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
-	parse_flags(av, &flag);
+	init_flags(&flag);
 	if (!valid_input(av, flag))
 		exit_error(NULL, NULL);
 	stack_b = NULL;
@@ -47,8 +44,6 @@ int	main(int ac, char **av)
 	s_size = ft_stack_size(stack_a);
 	set_index(stack_a, s_size);
 	push_swap(&stack_a, &stack_b, s_size, &flag);
-	if (flag.bench)
-		print_bench(flag);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

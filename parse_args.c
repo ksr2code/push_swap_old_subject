@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnestere <mnestere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksmailov <ksmailov@student.42heilbronn.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/02 13:14:34 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/11/11 15:54:55 by mnestere         ###   ########.fr       */
+/*   Created: 2025/12/01 17:50:47 by ksmailov          #+#    #+#             */
+/*   Updated: 2025/12/01 18:05:03 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,6 @@ int	valid_input(char **av, t_flag flag)
 	int	i;
 
 	i = 0;
-	if (flag.type)
-		i++;
-	if (flag.bench)
-		i++;
 	while (av[++i])
 		if (!is_number(av[i]) || !valid_len(av[i]))
 			return (0);

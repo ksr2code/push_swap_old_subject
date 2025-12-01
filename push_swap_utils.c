@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaviktorova <annaviktorova@student.42    +#+  +:+       +#+        */
+/*   By: ksmailov <ksmailov@student.42heilbronn.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/02 13:16:11 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/11/08 19:22:06 by annaviktoro      ###   ########.fr       */
+/*   Created: 2025/12/01 17:52:01 by ksmailov          #+#    #+#             */
+/*   Updated: 2025/12/01 21:05:06 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,20 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-void	print_bench(t_flag flag)
+void	init_flags(t_flag *flag)
 {
-	ft_printf("[bench] disorder: %i.%i%%\n", (int)(flag.disorder * 100),
-		(int)((flag.disorder - (int)flag.disorder) * 100));
-	if (flag.type == 1)
-		ft_printf("[bench] strategy: Simple / O(n²)\n");
-	else if (flag.type == 2)
-		ft_printf("[bench] strategy: Medium / O(n√n)\n");
-	else if (flag.type == 3)
-		ft_printf("[bench] strategy: Complex / O(nlogn)\n");
-	else if (flag.disorder < 0.2)
-		ft_printf("[bench] strategy: Adaptive / O(n)\n");
-	else if (flag.disorder >= 0.2 && flag.disorder < 0.5)
-		ft_printf("[bench] strategy: Adaptive / O(n√n)\n");
-	else if (flag.disorder >= 0.5)
-		ft_printf("[bench] strategy: Adaptive / O(nlogn)\n");
-	ft_printf("[bench] total_ops: %i\n", (flag.sb + flag.sa + flag.ss + flag.pa
-			+ flag.pb + flag.ra + flag.rb + flag.rr + flag.rra + flag.rrb
-			+ flag.rrr));
-	ft_printf("[bench] sa: %i sb: %i ss: %i pa: %i pb:% i\n", flag.sa, flag.sb,
-		flag.ss, flag.pa, flag.pb);
-	ft_printf("[bench] ra: %i rb: %i rr: %i rra: %i rrb:% i rrr: %i\n", flag.ra,
-		flag.rb, flag.rr, flag.rra, flag.rrb, flag.rrr);
+	flag->type = 0;
+	flag->bench = 0;
+	flag->sa = 0;
+	flag->sb = 0;
+	flag->ss = 0;
+	flag->pa = 0;
+	flag->pb = 0;
+	flag->ra = 0;
+	flag->rb = 0;
+	flag->rr = 0;
+	flag->rra = 0;
+	flag->rrb = 0;
+	flag->rrr = 0;
+	flag->disorder = 0.0f;
 }
