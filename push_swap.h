@@ -45,7 +45,8 @@ typedef struct s_flag
 
 //============== parse =================
 void				init_flags(t_flag *flag);
-int					valid_input(char **av, t_flag flag);
+int					valid_input(char **av);
+int					check_num(char *str, int *i);
 
 //============== utils =================
 void				exit_error(t_stack **stack_a, t_stack **stack_b);
@@ -54,7 +55,7 @@ int					is_sorted(t_stack *stack);
 int					is_number(char *av);
 
 //============== stack =================
-t_stack				*get_stack_values(char **av, t_flag flag);
+t_stack				*get_stack_values(char **av);
 void				set_index(t_stack *stack_a, int s_size);
 long				ft_atol(const char *str);
 t_stack				*stack_new(int nb);

@@ -25,8 +25,6 @@ void	set_index(t_stack *stack_a, int s_size)
 		highest = NULL;
 		while (ptr)
 		{
-			if (ptr->value == INT_MIN && ptr->index == 0)
-				ptr->index = 1;
 			if (ptr->value > value && ptr->index == 0)
 			{
 				value = ptr->value;
@@ -41,46 +39,46 @@ void	set_index(t_stack *stack_a, int s_size)
 	}
 }
 
-static void	import_num(char *str, t_stack **stack_a)
+static void	import_num(char *str, int *i, t_stack **stack_a)
 {
-	int		i;
+	int		start;
 	t_stack	*tmp;
 	long	nb;
 
-	i = 0;
-	while (str[i])
+	start = *i;
+	if (check_num(str, i))
 	{
-		if (is_number(&str[i]))
-		{
-			nb = ft_atol(&str[i]);
-			if (nb > INT_MAX || nb < INT_MIN)
-				exit_error(stack_a, NULL);
-			tmp = stack_new((int)nb);
-			if (!tmp)
-				exit_error(stack_a, NULL);
-			ft_stackadd_back(stack_a, tmp);
-			while (is_number(&str[i]))
-				i++;
-		}
-		else
-			i++;
+		nb = ft_atol(&str[start]);
+		if (nb > INT_MAX || nb < INT_MIN)
+			exit_error(stack_a, NULL);
+		tmp = stack_new((int)nb);
+		if (!tmp)
+			exit_error(stack_a, NULL);
+		ft_stackadd_back(stack_a, tmp);
 	}
+	else
+	i++;
 }
 
-t_stack	*get_stack_values(char **av, t_flag flag)
+t_stack	*get_stack_values(char **av)
 {
 	int		i;
+	int		j;
 	t_stack	*stack_a;
 
 	i = 1;
-	if (flag.type)
-		i++;
-	if (flag.bench)
-		i++;
 	stack_a = NULL;
 	while (av[i])
 	{
-		import_num(av[i], &stack_a);
+		j = 0;
+		while (av[i][j])
+		{
+			while (av[i][j] == ' ')
+				j++;
+			if (av[i][j] == '\0')
+				break ;
+			import_num(av[i], &j, &stack_a);
+		}
 		i++;
 	}
 	return (stack_a);

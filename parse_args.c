@@ -31,13 +31,13 @@ int	is_number(char *av)
 	return (1);
 }
 
-static int	have_duplicates(char **av, t_flag flag)
+static int	have_duplicates(char **av)
 {
 	t_stack	*head;
 	t_stack	*ptr1;
 	t_stack	*ptr2;
 
-	head = get_stack_values(av, flag);
+	head = get_stack_values(av);
 	if (!head)
 		return (1);
 	ptr1 = head;
@@ -59,36 +59,71 @@ static int	have_duplicates(char **av, t_flag flag)
 	return (0);
 }
 
-static int	valid_len(char *str)
+static int	valid_len(char *str, int start, int end)
 {
 	int	len;
 	int	zeros;
+	int	i;
 
+	i = start;
 	len = 0;
 	zeros = 0;
-	if (str[len] == '-' || str[len] == '+')
-		len++;
-	while (str[len] && str[len] == '0')
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (i < end && str[i] == '0')
 	{
 		zeros++;
 		len++;
+		i++;
 	}
-	while (str[len] && ft_isdigit(str[len]))
+	while (i < end && ft_isdigit(str[i]))
+	{
 		len++;
+		i++;
+	}
 	if ((len - zeros) > 11)
 		return (0);
 	return (1);
 }
 
-int	valid_input(char **av, t_flag flag)
+int	check_num(char *str, int *i)
+{
+	int	start;
+
+	while (str[*i] == ' ')
+		(*i)++;
+	if (str[*i] == '\0')
+		return (1);
+	start = *i;
+	if ((str[*i] == '-' || str[*i] == '+') && str[*i + 1] != '\0')
+		(*i)++;
+	if (!ft_isdigit(str[*i]))
+		return (0);
+	while (str[*i] == '0')
+		(*i)++;
+	while (ft_isdigit(str[*i]))
+		(*i)++;
+	if (!valid_len(str, start, *i))
+		return (0);
+	if (str[*i] != '\0' && str[*i] != ' ')
+		return (0);
+	return (1);
+}
+
+int	valid_input(char **av)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (av[++i])
-		if (!is_number(av[i]) || !valid_len(av[i]))
-			return (0);
-	if (have_duplicates(av, flag))
+	{
+		j = 0;
+		while (av[i][j])
+			if (!check_num(av[i], &j))
+				return (0);
+	}
+	if (have_duplicates(av))
 		return (0);
 	return (1);
 }
