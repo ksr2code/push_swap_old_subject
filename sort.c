@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	tiny_sort(t_stack **stack, t_flag *flag)
+void	tiny_sort(t_stack **stack)
 {
 	int		highest;
 	t_stack	*ptr;
@@ -26,15 +26,14 @@ void	tiny_sort(t_stack **stack, t_flag *flag)
 		ptr = ptr->next;
 	}
 	if ((*stack)->index == highest)
-		do_ra(stack, flag);
+		do_ra(stack);
 	else if ((*stack)->next->index == highest)
-		do_rra(stack, flag);
+		do_rra(stack);
 	if ((*stack)->index > (*stack)->next->index)
-		do_sa(stack, flag);
+		do_sa(stack);
 }
 
-void	small_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
-		t_flag *flag)
+void	small_sort(t_stack **stack_a, t_stack **stack_b, int s_size)
 {
 	int	min_index;
 	int	r_count;
@@ -47,22 +46,21 @@ void	small_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
 		rr_count = s_size - r_count;
 		if (r_count <= rr_count)
 			while ((*stack_a)->index != min_index)
-				do_ra(stack_a, flag);
+				do_ra(stack_a);
 		else
 			while ((*stack_a)->index != min_index)
-				do_rra(stack_a, flag);
+				do_rra(stack_a);
 		if (is_sorted(*stack_a) && !(*stack_b))
 			return ;
-		do_pb(stack_a, stack_b, flag);
+		do_pb(stack_a, stack_b);
 		s_size--;
 	}
-	tiny_sort(stack_a, flag);
+	tiny_sort(stack_a);
 	while (*stack_b)
-		do_pa(stack_a, stack_b, flag);
+		do_pa(stack_a, stack_b);
 }
 
-static void	make_chunks(t_stack **stack_a, t_stack **stack_b, int s_size,
-		t_flag *flag)
+static void	make_chunks(t_stack **stack_a, t_stack **stack_b, int s_size)
 {
 	int	i;
 	int	s_chunk;
@@ -73,31 +71,30 @@ static void	make_chunks(t_stack **stack_a, t_stack **stack_b, int s_size,
 	{
 		if ((*stack_a)->index <= i)
 		{
-			do_pb(stack_a, stack_b, flag);
+			do_pb(stack_a, stack_b);
 			if (*stack_a && ((*stack_a)->index <= i || (*stack_a)->index <= i
 					+ s_chunk))
-				do_rb(stack_b, flag);
+				do_rb(stack_b);
 			else
-				do_rr(stack_a, stack_b, flag);
+				do_rr(stack_a, stack_b);
 			i++;
 		}
 		else if ((*stack_a)->index <= i + s_chunk)
 		{
-			do_pb(stack_a, stack_b, flag);
+			do_pb(stack_a, stack_b);
 			i++;
 		}
 		else
-			do_ra(stack_a, flag);
+			do_ra(stack_a);
 	}
 }
 
-void	chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
-		t_flag *flag)
+void	chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size)
 {
 	int	r_count;
 	int	rr_count;
 
-	make_chunks(stack_a, stack_b, s_size, flag);
+	make_chunks(stack_a, stack_b, s_size);
 	while (s_size - 1 >= 0)
 	{
 		r_count = count_r(*stack_b, s_size);
@@ -105,15 +102,15 @@ void	chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size,
 		if (r_count <= rr_count)
 		{
 			while ((*stack_b)->index != s_size - 1)
-				do_rb(stack_b, flag);
-			do_pa(stack_a, stack_b, flag);
+				do_rb(stack_b);
+			do_pa(stack_a, stack_b);
 			s_size--;
 		}
 		else
 		{
 			while ((*stack_b)->index != s_size - 1)
-				do_rrb(stack_b, flag);
-			do_pa(stack_a, stack_b, flag);
+				do_rrb(stack_b);
+			do_pa(stack_a, stack_b);
 			s_size--;
 		}
 	}

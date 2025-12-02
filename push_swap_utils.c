@@ -47,21 +47,3 @@ int	is_sorted(t_stack *stack)
 	}
 	return (1);
 }
-
-void	init_flags(t_flag *flag)
-{
-	flag->type = 0;
-	flag->bench = 0;
-	flag->sa = 0;
-	flag->sb = 0;
-	flag->ss = 0;
-	flag->pa = 0;
-	flag->pb = 0;
-	flag->ra = 0;
-	flag->rb = 0;
-	flag->rr = 0;
-	flag->rra = 0;
-	flag->rrb = 0;
-	flag->rrr = 0;
-	flag->disorder = 0.0f;
-}

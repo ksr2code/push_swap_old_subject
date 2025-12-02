@@ -28,27 +28,21 @@ static void	rev_rotate(t_stack **stack)
 	*stack = last;
 }
 
-void	do_rra(t_stack **stack_a, t_flag *flag)
+void	do_rra(t_stack **stack_a)
 {
 	rev_rotate(stack_a);
-	if (!flag->bench)
-		ft_putstr_fd("rra\n", 1);
-	flag->rra++;
+	ft_putstr_fd("rra\n", 1);
 }
 
-void	do_rrb(t_stack **stack_b, t_flag *flag)
+void	do_rrb(t_stack **stack_b)
 {
 	rev_rotate(stack_b);
-	if (!flag->bench)
-		ft_putstr_fd("rrb\n", 1);
-	flag->rrb++;
+	ft_putstr_fd("rrb\n", 1);
 }
 
-void	do_rrr(t_stack **stack_a, t_stack **stack_b, t_flag *flag)
+void	do_rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	rev_rotate(stack_a);
 	rev_rotate(stack_b);
-	if (!flag->bench)
-		ft_putstr_fd("rrr\n", 1);
-	flag->rrr++;
+	ft_putstr_fd("rrr\n", 1);
 }

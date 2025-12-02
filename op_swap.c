@@ -26,18 +26,14 @@ static void	swap(t_stack **stack)
 	*stack = second;
 }
 
-void	do_sa(t_stack **stack_a, t_flag *flag)
+void	do_sa(t_stack **stack_a)
 {
 	swap(stack_a);
-	if (!flag->bench)
-		ft_putstr_fd("sa\n", 1);
-	flag->sa++;
+	ft_putstr_fd("sa\n", 1);
 }
 
-void	do_sb(t_stack **stack_b, t_flag *flag)
+void	do_sb(t_stack **stack_b)
 {
 	swap(stack_b);
-	if (!flag->bench)
-		ft_putstr_fd("sb\n", 1);
-	flag->sb++;
+	ft_putstr_fd("sb\n", 1);
 }
