@@ -57,7 +57,7 @@ static void	import_num(char *str, int *i, t_stack **stack_a)
 		ft_stackadd_back(stack_a, tmp);
 	}
 	else
-	i++;
+		i++;
 }
 
 t_stack	*get_stack_values(char **av)

@@ -27,21 +27,6 @@ static void	push_swap(t_stack **stack_a, t_stack **stack_b, int s_size,
 		chunk_sort(stack_a, stack_b, s_size, flag);
 }
 
-// static void	print_stack(t_stack *stack)
-// {
-// 	if (!stack)
-// 	{
-// 		ft_printf("empty\n");
-// 		return ;
-// 	}
-// 	while (stack)
-// 	{
-// 		ft_printf("value: %d, index: %d\n", stack->value, stack->index);
-// 		stack = stack->next;
-// 	}
-// 	ft_printf("\n");
-// }
-
 int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
@@ -58,7 +43,6 @@ int	main(int ac, char **av)
 	stack_a = get_stack_values(av);
 	s_size = ft_stack_size(stack_a);
 	set_index(stack_a, s_size);
-	// print_stack(stack_a);
 	push_swap(&stack_a, &stack_b, s_size, &flag);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
