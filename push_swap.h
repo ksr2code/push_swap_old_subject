@@ -6,7 +6,7 @@
 /*   By: ksmailov <ksmailov@student.42heilbronn.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:39:20 by ksmailov          #+#    #+#             */
-/*   Updated: 2025/12/01 21:10:41 by ksmailov         ###   ########.fr       */
+/*   Updated: 2025/12/03 12:34:35 by ksmailov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,42 @@ typedef struct s_stack
 }					t_stack;
 
 //============== parse =================
-int					valid_input(char **av);
-int					check_num(char *str, int *i);
+int		valid_input(char **av);
+int		check_num(char *str, int *i);
 
 //============== utils =================
-void				exit_error(t_stack **stack_a, t_stack **stack_b);
-void				free_stack(t_stack **stack);
-int					is_sorted(t_stack *stack);
+void	exit_error(t_stack **stack_a, t_stack **stack_b);
+void	free_stack(t_stack **stack);
+int		is_sorted(t_stack *stack);
 
 //============== stack =================
-t_stack				*get_stack_values(char **av);
-void				set_index(t_stack *stack_a, int s_size);
-long				ft_atol(const char *str);
-t_stack				*stack_new(int nb);
-int					ft_stack_size(t_stack *stack);
-void				ft_stackadd_back(t_stack **stack, t_stack *new);
+t_stack	*get_stack_values(char **av);
+void	set_index(t_stack *stack_a, int s_size);
+long	ft_atol(const char *str);
+t_stack	*stack_new(int nb);
+int		ft_stack_size(t_stack *stack);
+void	ft_stackadd_back(t_stack **stack, t_stack *new);
 
 //============== sort ==================
-void				chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size);
-void				small_sort(t_stack **stack_a, t_stack **stack_b, int s_size);
-void				tiny_sort(t_stack **stack);
+void	chunk_sort(t_stack **stack_a, t_stack **stack_b, int s_size);
+void	small_sort(t_stack **stack_a, t_stack **stack_b, int s_size);
+void	tiny_sort(t_stack **stack);
 
 //============ sort utils ==============
-int					ft_sqrt(int nb);
-int					get_min_index(t_stack *stack);
-int					count_r(t_stack *stack, int s_size);
+int		ft_sqrt(int nb);
+int		get_min_index(t_stack *stack);
+int		count_r(t_stack *stack, int s_size);
 
 //=========== operations ==============
-void				do_sa(t_stack **stack_a);
-void				do_sb(t_stack **stack_b);
-void				do_pa(t_stack **stack_a, t_stack **stack_b);
-void				do_pb(t_stack **stack_a, t_stack **stack_b);
-void				do_ra(t_stack **stack_a);
-void				do_rb(t_stack **stack_b);
-void				do_rr(t_stack **stack_a, t_stack **stack_b);
-void				do_rra(t_stack **stack_a);
-void				do_rrb(t_stack **stack_b);
-void				do_rrr(t_stack **stack_a, t_stack **stack_b);
+void	do_sa(t_stack **stack_a);
+void	do_sb(t_stack **stack_b);
+void	do_pa(t_stack **stack_a, t_stack **stack_b);
+void	do_pb(t_stack **stack_a, t_stack **stack_b);
+void	do_ra(t_stack **stack_a);
+void	do_rb(t_stack **stack_b);
+void	do_rr(t_stack **stack_a, t_stack **stack_b);
+void	do_rra(t_stack **stack_a);
+void	do_rrb(t_stack **stack_b);
+void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 
 #endif

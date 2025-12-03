@@ -22,9 +22,13 @@ SRCS_COMMON = push_swap_utils.c\
 			  stack.c\
 			  stack_utils.c
 
-SRCS_BONUS = bonus/checker.c\
-			 GNL/get_next_line.h\
-			 GNL/get_next_line_utils.h
+SRCS_BONUS = bonus/checker_bonus.c\
+			 bonus/op_push_bonus.c\
+			 bonus/op_rev_rotate_bonus.c\
+			 bonus/op_rotate_bonus.c\
+			 bonus/op_swap_bonus.c\
+			 GNL/get_next_line.c\
+			 GNL/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o) $(SRCS_COMMON:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o) $(SRCS_COMMON:.c=.o)
